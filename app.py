@@ -15,7 +15,7 @@ class up(Resource):
     def post(self,file,detach):
         detach = True if detach =="true" else False
         resp = run(f'docker-compose -f {file} up {"-d" if detach else ""}', stdout=PIPE, stderr=PIPE, universal_newlines=True)
-        return {"build": f'{"ok" if not resp.returncode else resp.stderr}'}
+        return {"up": f'{"ok" if not resp.returncode else resp.stderr}'}
 
 
 api.add_resource(build, '/build/<string:file>')
